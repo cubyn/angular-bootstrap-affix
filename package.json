@@ -1,12 +1,13 @@
 {
   "name": "angular-bootstrap-affix",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "bootstrap-affix",
   "keywords": [
     "angular"
   ],
   "homepage": "https://github.com/maxisam/angular-bootstrap-affix",
   "bugs": "https://github.com/maxisam/angular-bootstrap-affix",
+  "main": "index.js",
   "author": {
     "name": "Olivier Louvignes (original), maxisam",
     "email": "maxisam@gmail.com",

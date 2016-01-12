@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('mgcrea.bootstrap.affix', ['mgcrea.jquery'])
+angular.module('mgcrea.bootstrap.affix', [])
 
-  .directive('bsAffix', function($window, dimensions) {
+  .directive('bsAffix', function($window) {
 
     var checkPosition = function(instance, el, options) {
 
       var scrollTop = window.pageYOffset;
       var scrollHeight = document.body.scrollHeight;
-      var position = dimensions.offset.call(el[0]);
-      var height = dimensions.height.call(el[0]);
+      var position = getOffset(el[0]);
+      var height = getHeight(el[0]);
       var offsetTop = options.offsetTop * 1;
       var offsetBottom = options.offsetBottom * 1;
       var reset = 'affix affix-top affix-bottom';
@@ -64,3 +64,23 @@ angular.module('mgcrea.bootstrap.affix', ['mgcrea.jquery'])
     };
 
   });
+
+function getOffset(el) {
+  var box = el.getBoundingClientRect();
+  var docElem = el.ownerDocument.documentElement;
+  return {
+    top: box.top + window.pageYOffset - docElem.clientTop,
+    left: box.left + window.pageXOffset - docElem.clientLeft
+  };
+};
+
+function getHeight(el, outer) {
+  var computedStyle = window.getComputedStyle(el);
+  var value = el.offsetHeight;
+  if(outer) {
+    value += parseFloat(computedStyle.marginTop) + parseFloat(computedStyle.marginBottom);
+  } else {
+    value -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom) + parseFloat(computedStyle.borderTopWidth) + parseFloat(computedStyle.borderBottomWidth);
+  }
+  return value;
+};
